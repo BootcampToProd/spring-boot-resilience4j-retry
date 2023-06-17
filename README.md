@@ -65,7 +65,7 @@ curl 'http://localhost:8080/movies/3?retryType=retry-using-randomized-wait'
 
 ### 7. Retry with Fallback
 ```
-curl 'http://localhost:8080/movies/3?retryType=retry-with-fallback'
+curl 'http://localhost:8080/movies/4?retryType=retry-with-fallback'
 ```
 
 ### 8. Retry with Custom Retry Configuration
