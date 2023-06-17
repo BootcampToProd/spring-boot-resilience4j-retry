@@ -1,0 +1,39 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+resilience4j.retry:
+  instances:
+    simpleRetry:
+      maxAttempts: 3
+      waitDuration: 5s
+    retryOnException:
+      maxAttempts: 4
+      waitDuration: 3s
+      retryExceptions:
+        - org.springframework.web.client.HttpClientErrorException
+      ignoreExceptions:
+        - com.bootcamptoprod.retry.exception.MovieNotFoundException
+    retryBasedOnConditionalPredicate:
+      maxAttempts: 2
+      waitDuration: 5s
+      resultPredicate: com.bootcamptoprod.retry.predicate.ConditionPredicate
+    retryBasedOnExceptionPredicate:
+      maxAttempts: 3
+      waitDuration: 4s
+      retryExceptionPredicate: com.bootcamptoprod.retry.predicate.ExceptionPredicate
+    retryUsingExponentialBackoff:
+      maxAttempts: 4
+      waitDuration: 2s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+    retryUsingRandomizedWait:
+      maxAttempts: 4
+      waitDuration: 2s
+      enableRandomizedWait: true
+      randomizedWaitFactor: 0.7
+    retryWithEventDetails:
+      maxAttempts: 3
+      waitDuration: 5s
